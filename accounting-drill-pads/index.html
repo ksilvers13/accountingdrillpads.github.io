@@ -1,0 +1,263 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Accounting Drill Pads</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: a stack of the five ruled pads, each in its own accent, ordered as a learning path from first entries to the CPA exam */
+:root{
+  --paper:#f0f2ef; --card:#fbfcfa; --rule:#dde2db; --ink:#1d2320; --muted:#5d6760;
+  --margin:#c4473a; --line:#cbd2c9;
+  --debit:#2b4fa8; --pe:#8a4512; --formula:#7a3b8f; --far:#0e6670; --tax:#2f6b2a;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Public Sans",ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#121513; --card:#1a1e1b; --rule:#262c28; --ink:#e4e9e5; --muted:#98a39b; --margin:#d46a5d; --line:#323a34;
+  --debit:#8fa9ff; --pe:#f0a868; --formula:#d4a5e6; --far:#6fd0d4; --tax:#93d48b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#121513; --card:#1a1e1b; --rule:#262c28; --ink:#e4e9e5; --muted:#98a39b; --margin:#d46a5d; --line:#323a34;
+  --debit:#8fa9ff; --pe:#f0a868; --formula:#d4a5e6; --far:#6fd0d4; --tax:#93d48b; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 56px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+header{display:flex;flex-direction:column;gap:8px}
+.kicker{font:600 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--margin)}
+h1{font:800 clamp(2rem,6vw,2.8rem)/1 var(--display);margin:0;letter-spacing:-.025em;text-wrap:balance}
+.lede{margin:0;color:var(--muted);max-width:58ch;text-wrap:pretty}
+.byline{font:500 .85rem var(--mono);color:var(--muted);margin:2px 0 0}
+
+.pads{display:flex;flex-direction:column;gap:12px;list-style:none;margin:0;padding:0}
+.pad{--a:var(--ink);position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px 18px;align-items:center;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 18px 18px 40px;color:inherit;text-decoration:none;
+  background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--rule) 31px,var(--rule) 32px);background-position:0 14px;
+  transition:border-color .15s,transform .15s}
+.pad::before{content:"";position:absolute;left:20px;top:0;bottom:0;width:2px;background:var(--margin);opacity:.55}
+.pad:hover{border-color:var(--a)}
+.pad:focus-visible{outline:2px solid var(--a);outline-offset:3px}
+@media (prefers-reduced-motion:no-preference){.pad:hover{transform:translateX(3px)}}
+.step{font:600 .72rem var(--mono);color:var(--muted);letter-spacing:.06em;align-self:start;padding-top:6px}
+.body{min-width:0;display:flex;flex-direction:column;gap:4px}
+.pad h2{margin:0;font:800 1.45rem/1.1 var(--display);letter-spacing:-.015em}
+.pad h2 span{color:var(--a)}
+.pad p{margin:0;color:var(--muted);font-size:.94rem;max-width:56ch}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.tags span{font:500 .74rem var(--mono);color:var(--a);border:1px solid var(--line);background:var(--paper);padding:1px 7px;border-radius:5px}
+.go{font:600 .9rem var(--body);color:var(--a);white-space:nowrap}
+.mine{grid-column:2 / -1;font:500 .78rem var(--mono);color:var(--muted)}
+.mine b{color:var(--ink);font-weight:600}
+@media (max-width:560px){
+  .pad{grid-template-columns:minmax(0,1fr);padding:16px 14px 16px 32px}.pad::before{left:15px}
+  .step{padding-top:0}.go{justify-self:start}.mine{grid-column:1}
+}
+.pad.debit{--a:var(--debit)}.pad.pe{--a:var(--pe)}.pad.formula{--a:var(--formula)}.pad.far{--a:var(--far)}.pad.tax{--a:var(--tax)}
+
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.how div{border-top:2px solid var(--line);padding-top:10px}
+.how h3{margin:0 0 4px;font:700 .98rem var(--body)}
+.how p{margin:0;font-size:.9rem;color:var(--muted)}
+footer{font-size:.84rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+
+/* leaderboard */
+.lb{position:relative;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 20px 18px 40px;display:flex;flex-direction:column;gap:14px}
+.lb::before{content:"";position:absolute;left:20px;top:0;bottom:0;width:2px;background:var(--margin);opacity:.55}
+.lbhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px}
+.lbhead h2{margin:0;font:800 1.45rem/1.1 var(--display);letter-spacing:-.015em}
+.lbsum{margin:0;font:500 .82rem var(--mono);color:var(--muted)}
+.lbsum b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.you{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:.92rem}
+.you input{font:500 .95rem var(--body);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0;flex:1 1 180px;max-width:280px}
+.you input:focus-visible,.btn:focus-visible{outline:2px solid var(--far);outline-offset:2px}
+.btn{font:600 .88rem var(--body);border-radius:8px;padding:8px 14px;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:var(--card)}
+.btn.ghost{background:transparent;color:var(--muted);border:1px dashed var(--line)}
+.btn:disabled{opacity:.5;cursor:default}
+.you .mine-line{color:var(--muted)}
+.you .mine-line b{color:var(--ink)}
+.tw{overflow-x:auto}
+.board{width:100%;border-collapse:collapse;font-size:.92rem;min-width:420px}
+.board th{font:600 .7rem var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-align:right;padding:4px 8px;border-bottom:1px solid var(--line)}
+.board th:nth-child(2){text-align:left}
+.board td{padding:7px 8px;border-bottom:1px solid var(--rule);text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.board td:nth-child(2){text-align:left;font-family:var(--body);font-weight:600;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.board td:first-child{color:var(--muted);width:2.5em}
+.board tr.me td{background:color-mix(in srgb,var(--far) 12%,transparent)}
+.board tr.me td:nth-child(2)::after{content:" (you)";font-weight:500;color:var(--muted)}
+.lbnote{margin:0;font-size:.88rem;color:var(--muted)}
+.lbnote.warn{color:var(--margin)}
+@media (max-width:560px){.lb{padding:16px 14px 16px 32px}.lb::before{left:15px}}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="kicker">Practice pads · from first entries to the CPA</span>
+    <h1>Accounting Drill Pads</h1>
+    <p class="lede">Five endless practice tools. Every question is generated fresh, graded instantly and explained, and every miss is saved so you can redo it until it sticks.</p>
+    <p class="byline">Built by Keith Silverstein · UConn School of Business</p>
+  </header>
+
+  <ol class="pads">
+    <li><a class="pad debit" href="debit.html">
+      <span class="step">01</span>
+      <span class="body"><h2>Debit <span>Drill</span></h2>
+        <p>Journal entries and debit/credit rules for everyday transactions.</p>
+        <span class="tags"><span>Journal entries</span><span>Adjusting entries</span><span>Normal balances</span></span></span>
+      <span class="go">Open →</span>
+      <span class="mine" data-key="debitDrill"></span></a></li>
+    <li><a class="pad pe" href="period-end.html">
+      <span class="step">02</span>
+      <span class="body"><h2>Period-End <span>Drill</span></h2>
+        <p>Adjusting entries and how the three financial statements tie together.</p>
+        <span class="tags"><span>Accruals &amp; deferrals</span><span>Missed-adjustment effects</span><span>Cash flows</span></span></span>
+      <span class="go">Open →</span>
+      <span class="mine" data-key="periodEndDrill"></span></a></li>
+    <li><a class="pad formula" href="formula.html">
+      <span class="step">03</span>
+      <span class="body"><h2>Formula <span>Drill</span></h2>
+        <p>Real Excel formulas, graded by a built-in formula engine, from SUM to XLOOKUP and NPV.</p>
+        <span class="tags"><span>Lookups</span><span>SUMIFS</span><span>Cell references</span><span>PMT &amp; NPV</span></span></span>
+      <span class="go">Open →</span>
+      <span class="mine" data-key="formulaDrill"></span></a></li>
+    <li><a class="pad far" href="far.html">
+      <span class="step">04</span>
+      <span class="body"><h2>FAR <span>Drill</span></h2>
+        <p>CPA-style problems on the Financial Accounting and Reporting section.</p>
+        <span class="tags"><span>Bonds</span><span>Leases (ASC 842)</span><span>Revenue (ASC 606)</span><span>Income taxes</span></span></span>
+      <span class="go">Open →</span>
+      <span class="mine" data-key="farDrill"></span></a></li>
+    <li><a class="pad tax" href="tax.html">
+      <span class="step">05</span>
+      <span class="body"><h2>Tax Return Basics <span>Drill</span></h2>
+        <p>Filing status, the standard deduction and the Form 1040 flow, with tax year 2026 figures. Built as prep for VITA.</p>
+        <span class="tags"><span>Filing status</span><span>Standard deduction</span><span>AGI &amp; taxable income</span><span>Refund or owed</span></span></span>
+      <span class="go">Open →</span>
+      <span class="mine" data-key="taxDrill"></span></a></li>
+  </ol>
+
+  <section class="lb" id="lbSec" aria-labelledby="lbh">
+    <div class="lbhead"><h2 id="lbh">Leaderboard</h2><p class="lbsum" id="lbSum"></p></div>
+    <div class="you" id="you"></div>
+    <div class="tw" id="boardWrap" hidden><table class="board"><thead><tr><th>#</th><th>Name</th><th>Correct</th><th>Accuracy</th><th>Best streak</th></tr></thead><tbody id="board"></tbody></table></div>
+    <p class="lbnote" id="lbNote">Loading the leaderboard…</p>
+  </section>
+
+  <section class="how" aria-label="How the drills work">
+    <div><h3>Endless questions</h3><p>Amounts, companies and scenarios are randomized, so you can't memorize answers.</p></div>
+    <div><h3>Work shown</h3><p>Every answer comes with the entry or calculation and why it works.</p></div>
+    <div><h3>Redo your misses</h3><p>Missed questions are saved on your device and drop off once you get them right.</p></div>
+  </section>
+
+  <footer id="foot">Missed questions stay in your own browser. The leaderboard adds up correct answers from every device you join from, counted from when you join.</footer>
+</div>
+
+<script>
+document.querySelectorAll(".mine").forEach(el=>{
+  let s={};try{s=JSON.parse(localStorage.getItem(el.dataset.key)||"{}")}catch(e){}
+  const m=Array.isArray(s.missed)?s.missed.length:0,b=s.best||0;
+  if(b||m)el.innerHTML=`Your best streak <b>${b}</b> · <b>${m}</b> miss${m===1?"":"es"} to redo`;
+  else el.hidden=true;
+});
+
+// ---------- Leaderboard ----------
+const KEYS={debitDrill:"debit",periodEndDrill:"pe",formulaDrill:"formula",farDrill:"far",taxDrill:"tax"};
+const readLS=k=>{try{return JSON.parse(localStorage.getItem(k)||"{}")}catch(e){return{}}};
+const num=v=>{v=Number(v);return isFinite(v)&&v>0?Math.floor(v):0};
+function localStats(){let a=0,c=0;const b={};for(const [k,n] of Object.entries(KEYS)){const s=readLS(k);a+=num(s.life);c+=num(s.lifeOk);b[n]=num(s.best)}return{a,c,b}}
+let dev=null;
+try{dev=localStorage.getItem("hubDevice");if(!dev){dev="d"+Math.random().toString(36).slice(2,12);localStorage.setItem("hubDevice",dev)}if(localStorage.getItem("hubDevice")!==dev)dev=null}catch(e){dev=null}
+
+const $id=id=>document.getElementById(id);
+const note=(t,warn)=>{$id("lbNote").textContent=t;$id("lbNote").className="lbnote"+(warn?" warn":"");$id("lbNote").hidden=!t};
+const use=n=>window.claude&&window.claude.use?window.claude.use(n):Promise.resolve(null);
+function summarize(d){
+  const devs=d&&typeof d.devices==="object"&&d.devices?Object.values(d.devices):[];
+  let a=0,c=0,best=0;
+  for(const x of devs){if(!x||typeof x!=="object")continue;a+=num(x.a);c+=Math.min(num(x.c),num(x.a));const b=x.b&&typeof x.b==="object"?x.b:{};for(const v of Object.values(b))best=Math.max(best,num(v))}
+  return{nick:String(d&&d.nick||"").trim().slice(0,24)||"Anonymous",a,c,best};
+}
+
+(async()=>{
+  const [db,user]=await Promise.all([use("db"),use("user")]);
+  if(!db){$id("lbSec").hidden=true;$id("foot").textContent="Missed questions and streaks are saved in your own browser.";return}
+  const uid=user?await user.id():null;
+  const canW=user?await user.can("data.write"):null;
+  let rows=[],mine=null,readOnly=!uid||canW===false,synced=false,busy=false,editing=false,loaded=false;
+  const myRef=uid?db.doc("scores/"+uid):null;
+
+  function renderYou(){
+    const el=$id("you");el.replaceChildren();
+    if(!loaded)return;
+    if(readOnly){
+      const p=document.createElement("p");p.className="lbnote";p.style.margin="0";
+      p.textContent=uid?"You can see the leaderboard, but this link doesn't let you post scores. Ask the person who shared it for edit access."
+        :"You can see the leaderboard. Sign in with an account that has access to post your own scores.";
+      el.append(p);return}
+    const ls=localStats();
+    if(mine&&!editing){
+      const s=document.createElement("span");s.className="mine-line";
+      s.append("Posting as ");const b=document.createElement("b");b.textContent=summarize(mine).nick;s.append(b,`. This device: ${ls.c.toLocaleString()} correct of ${ls.a.toLocaleString()}.`);
+      const btn=document.createElement("button");btn.className="btn ghost";btn.type="button";btn.textContent="Change name";btn.onclick=()=>{editing=true;renderYou()};
+      el.append(s,btn);return}
+    const inp=document.createElement("input");inp.id="nick";inp.maxLength=24;inp.placeholder="Display name, e.g. Keith S.";inp.setAttribute("aria-label","Display name for the leaderboard");
+    if(mine)inp.value=summarize(mine).nick;
+    const btn=document.createElement("button");btn.className="btn";btn.type="button";btn.textContent=mine?"Save name":"Join the leaderboard";
+    const go=async()=>{
+      const nick=inp.value.trim().slice(0,24);
+      if(!nick){inp.focus();note("Enter a display name first.",true);return}
+      if(busy)return;busy=true;btn.disabled=true;
+      try{
+        if(!mine)await myRef.set({nick,devices:dev?{[dev]:{a:ls.a,c:ls.c,b:ls.b,t:new Date().toISOString()}}:{}});
+        else await myRef.update({nick});
+        synced=true;editing=false;note("");
+      }catch(e){
+        if(e&&(e.code==="invalid_argument"||e.code==="not_granted")){readOnly=true;note("")}
+        else if(e&&e.code==="quota_exceeded")note("The leaderboard is full. Ask the owner to clear old entries.",true);
+        else note("Couldn't save just now. Try again in a moment.",true);
+      }finally{busy=false;btn.disabled=false;renderYou()}
+    };
+    btn.onclick=go;inp.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();go()}};
+    el.append(inp,btn);
+    if(mine){const c=document.createElement("button");c.className="btn ghost";c.type="button";c.textContent="Cancel";c.onclick=()=>{editing=false;renderYou()};el.append(c)}
+  }
+
+  function renderBoard(){
+    const list=rows.filter(r=>r.a>0||r.id===uid).sort((x,y)=>y.c-x.c||(y.c/(y.a||1))-(x.c/(x.a||1))||y.best-x.best).slice(0,50);
+    const tb=$id("board");tb.replaceChildren();
+    list.forEach((r,i)=>{
+      const tr=document.createElement("tr");if(r.id===uid)tr.className="me";
+      [String(i+1),r.nick,r.c.toLocaleString(),r.a?Math.round(r.c/r.a*100)+"%":"–",String(r.best)].forEach(v=>{const td=document.createElement("td");td.textContent=v;tr.append(td)});
+      tb.append(tr);
+    });
+    $id("boardWrap").hidden=!list.length;
+    const total=rows.reduce((s,r)=>s+r.a,0);
+    $id("lbSum").innerHTML=rows.length?`<b>${rows.length}</b> ${rows.length===1?"person":"people"} · <b>${total.toLocaleString()}</b> questions answered`:"";
+    if(!list.length)note(rows.length?"Everyone's joined but nobody has answered a question yet. Open a drill to get on the board.":"No one's on the board yet. Join with a display name, then practice in any drill. Your correct answers show up here.");
+    else if(!$id("lbNote").classList.contains("warn"))note("");
+  }
+
+  async function sync(){
+    if(!dev||!mine||readOnly||busy)return;
+    const ls=localStats(),cur=mine.devices&&mine.devices[dev];
+    const same=cur&&num(cur.a)===ls.a&&num(cur.c)===ls.c&&Object.keys(KEYS).every(k=>num(cur.b&&cur.b[KEYS[k]])===ls.b[KEYS[k]]);
+    if(same||(!cur&&ls.a===0))return;
+    busy=true;
+    try{await myRef.update({devices:{[dev]:{a:ls.a,c:ls.c,b:ls.b,t:new Date().toISOString()}}})}
+    catch(e){if(e&&e.code==="invalid_argument"){readOnly=true;renderYou()}}
+    finally{busy=false}
+  }
+
+  db.collection("scores").onSnapshot(snap=>{
+    loaded=true;
+    rows=snap.docs.filter(d=>d.exists).map(d=>({id:d.id,...summarize(d.data())}));
+    const m=uid&&snap.docs.find(d=>d.id===uid&&d.exists);mine=m?m.data():null;
+    renderBoard();renderYou();
+    if(!synced&&mine){synced=true;sync()}
+  },e=>{loaded=true;note(e&&e.code==="revoked"?"The leaderboard isn't available in this view.":"The leaderboard couldn't load. Reopen the page to try again.",true);renderYou()});
+})();
+</script>
+
+
+</body></html>
