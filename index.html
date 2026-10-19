@@ -7,96 +7,97 @@
 <meta name="description" content="Ten free, randomized accounting practice tools: journal entries, Excel, tax, and every CPA exam section. Instant grading and worked solutions.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 [hidden]{display:none!important}
 body{margin:0}
-/* Layout: a stack of the ten ruled pads, each in its own accent, ordered as a learning path from first entries to the CPA exam */
+/* One monotone navy for every surface; two accents: teal for the foundation drills, gold for the CPA sections */
 :root{
-  --paper:#f0f2ef; --card:#fbfcfa; --rule:#dde2db; --ink:#1d2320; --muted:#5d6760;
-  --margin:#c4473a; --line:#cbd2c9;
-  --debit:#2b4fa8; --pe:#8a4512; --formula:#7a3b8f; --far:#0e6670; --tax:#2f6b2a;
-  --aud:#8a6100; --reg:#5b6b16; --bar:#3d5a80; --isc:#5a46b0; --tcp:#a8306a;
-  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
-  --body:"Public Sans",ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --bg:#0c1524; --surface:#111d31; --surface-2:#16253e; --line:#1f3150; --line-2:#2a4066;
+  --ink:#eaf0f8; --muted:#8c9cb6; --faint:#5f7194;
+  --teal:#3cc4b4; --gold:#e9b44c; --warn:#f07b6b;
+  --sans:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:dark;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#121513; --card:#1a1e1b; --rule:#262c28; --ink:#e4e9e5; --muted:#98a39b; --margin:#d46a5d; --line:#323a34;
-  --debit:#8fa9ff; --pe:#f0a868; --formula:#d4a5e6; --far:#6fd0d4; --tax:#93d48b; --aud:#e8c063; --reg:#c5d77a; --bar:#9fbfe8; --isc:#b3a6f2; --tcp:#f29ac4; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --paper:#121513; --card:#1a1e1b; --rule:#262c28; --ink:#e4e9e5; --muted:#98a39b; --margin:#d46a5d; --line:#323a34;
-  --debit:#8fa9ff; --pe:#f0a868; --formula:#d4a5e6; --far:#6fd0d4; --tax:#93d48b; --aud:#e8c063; --reg:#c5d77a; --bar:#9fbfe8; --isc:#b3a6f2; --tcp:#f29ac4; color-scheme:dark}
-
 *{box-sizing:border-box}
-body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 56px}
-.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
-header{display:flex;flex-direction:column;gap:8px}
-.kicker{font:600 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--margin)}
-h1{font:800 clamp(2rem,6vw,2.8rem)/1 var(--display);margin:0;letter-spacing:-.025em;text-wrap:balance}
-.lede{margin:0;color:var(--muted);max-width:58ch;text-wrap:pretty}
-.byline{font:500 .85rem var(--mono);color:var(--muted);margin:2px 0 0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:48px 64px}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
 
-.pads{display:flex;flex-direction:column;gap:12px;list-style:none;margin:0;padding:0}
-.pad{--a:var(--ink);position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px 18px;align-items:center;
-  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 18px 18px 40px;color:inherit;text-decoration:none;
-  background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--rule) 31px,var(--rule) 32px);background-position:0 14px;
-  transition:border-color .15s,transform .15s}
-.pad::before{content:"";position:absolute;left:20px;top:0;bottom:0;width:2px;background:var(--margin);opacity:.55}
-.pad:hover{border-color:var(--a)}
+header{display:flex;flex-direction:column;gap:10px;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.kicker{font:600 .72rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+h1{font:700 clamp(2rem,5.5vw,2.9rem)/1.05 var(--sans);margin:0;letter-spacing:-.03em;text-wrap:balance}
+.lede{margin:0;color:var(--muted);max-width:60ch;font-size:1.02rem;text-wrap:pretty}
+.byline{font:500 .8rem var(--mono);color:var(--faint);margin:4px 0 0}
+
+/* Tiles */
+.pads{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;list-style:none;margin:0;padding:0}
+.pads > li{display:flex;min-width:0}
+.pad{--a:var(--teal);position:relative;flex:1;display:flex;flex-direction:column;gap:12px;overflow:hidden;
+  background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 20px 16px;color:inherit;text-decoration:none;
+  transition:border-color .18s,background-color .18s,transform .18s}
+.pads > li.cpa .pad{--a:var(--gold)}
+.pad::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--a);opacity:.85}
+.pad:hover{border-color:var(--line-2);background:var(--surface-2)}
 .pad:focus-visible{outline:2px solid var(--a);outline-offset:3px}
-@media (prefers-reduced-motion:no-preference){.pad:hover{transform:translateX(3px)}}
-.step{font:600 .72rem var(--mono);color:var(--muted);letter-spacing:.06em;align-self:start;padding-top:6px}
-.body{min-width:0;display:flex;flex-direction:column;gap:4px}
-.pad h2{margin:0;font:800 1.45rem/1.1 var(--display);letter-spacing:-.015em}
-.pad h2 span{color:var(--a)}
-.pad p{margin:0;color:var(--muted);font-size:.94rem;max-width:56ch}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
-.tags span{font:500 .74rem var(--mono);color:var(--a);border:1px solid var(--line);background:var(--paper);padding:1px 7px;border-radius:5px}
-.go{font:600 .9rem var(--body);color:var(--a);white-space:nowrap}
-.mine{grid-column:2 / -1;font:500 .78rem var(--mono);color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.pad:hover{transform:translateY(-2px)}}
+.top{display:flex;align-items:center;gap:8px}
+.step{font:600 .72rem var(--mono);color:var(--a);letter-spacing:.06em;
+  border:1px solid color-mix(in srgb,var(--a) 40%,transparent);background:color-mix(in srgb,var(--a) 10%,transparent);padding:1px 7px;border-radius:999px}
+.body{min-width:0;display:flex;flex-direction:column;gap:6px;flex:1}
+.pad h2{margin:0;font:650 1.2rem/1.2 var(--sans);letter-spacing:-.015em;text-wrap:balance}
+.pad h2 span{color:var(--muted);font-weight:500}
+.pad p{margin:0;color:var(--muted);font-size:.9rem;text-wrap:pretty}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:8px}
+.tags span{font:500 .7rem var(--mono);color:#b8c5da;background:var(--surface-2);border:1px solid var(--line);padding:2px 7px;border-radius:5px}
+.pad:hover .tags span{background:var(--bg)}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-top:12px}
+.go{font:600 .86rem var(--sans);color:var(--a);white-space:nowrap;margin-left:auto}
+.mine{flex:1;font:500 .72rem var(--mono);color:var(--faint);min-width:0}
 .mine b{color:var(--ink);font-weight:600}
-@media (max-width:560px){
-  .pad{grid-template-columns:minmax(0,1fr);padding:16px 14px 16px 32px}.pad::before{left:15px}
-  .step{padding-top:0}.go{justify-self:start}.mine{grid-column:1}
-}
-.pad.debit{--a:var(--debit)}.pad.pe{--a:var(--pe)}.pad.formula{--a:var(--formula)}.pad.far{--a:var(--far)}.pad.tax{--a:var(--tax)}.pad.aud{--a:var(--aud)}.pad.reg{--a:var(--reg)}.pad.bar{--a:var(--bar)}.pad.isc{--a:var(--isc)}.pad.tcp{--a:var(--tcp)}
-.group{margin:8px 0 0;font:600 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);list-style:none;padding-left:2px}
+.group{grid-column:1 / -1;display:flex;align-items:center;gap:10px;margin:14px 0 2px;font:600 .72rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.group::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--teal)}
+.group.cpa-label::before{background:var(--gold)}
+.group::after{content:"";flex:1;height:1px;background:var(--line)}
+.pads > li.group:first-child{margin-top:0}
+/* Wide screens: the four foundation drills sit four across, the six CPA sections three across */
+@media (min-width:960px){.pads{grid-template-columns:repeat(12,minmax(0,1fr))}.pads > li{grid-column:span 3}.pads > li.cpa{grid-column:span 4}.pads > li.group{grid-column:1 / -1}}
+@media (max-width:560px){.pads{grid-template-columns:minmax(0,1fr)}}
 
-.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.how div{border-top:2px solid var(--line);padding-top:10px}
-.how h3{margin:0 0 4px;font:700 .98rem var(--body)}
-.how p{margin:0;font-size:.9rem;color:var(--muted)}
-footer{font-size:.84rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.how div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.how h3{margin:0 0 4px;font:600 .98rem var(--sans)}
+.how p{margin:0;font-size:.88rem;color:var(--muted)}
+footer{font-size:.82rem;color:var(--faint);border-top:1px solid var(--line);padding-top:16px}
 
 /* leaderboard */
-.lb{position:relative;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 20px 18px 40px;display:flex;flex-direction:column;gap:14px}
-.lb::before{content:"";position:absolute;left:20px;top:0;bottom:0;width:2px;background:var(--margin);opacity:.55}
+.lb{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px 22px 20px;display:flex;flex-direction:column;gap:16px}
 .lbhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px}
-.lbhead h2{margin:0;font:800 1.45rem/1.1 var(--display);letter-spacing:-.015em}
-.lbsum{margin:0;font:500 .82rem var(--mono);color:var(--muted)}
-.lbsum b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.lbhead h2{margin:0;font:650 1.25rem/1.2 var(--sans);letter-spacing:-.015em}
+.lbsum{margin:0;font:500 .8rem var(--mono);color:var(--muted)}
+.lbsum b{color:var(--gold);font-weight:600;font-variant-numeric:tabular-nums}
 .you{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:.92rem}
-.you input{font:500 .95rem var(--body);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0;flex:1 1 180px;max-width:280px}
-.you input:focus-visible,.btn:focus-visible{outline:2px solid var(--far);outline-offset:2px}
-.btn{font:600 .88rem var(--body);border-radius:8px;padding:8px 14px;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:var(--card)}
-.btn.ghost{background:transparent;color:var(--muted);border:1px dashed var(--line)}
+.you input{font:500 .95rem var(--sans);color:var(--ink);background:var(--bg);border:1px solid var(--line-2);border-radius:8px;padding:9px 11px;min-width:0;flex:1 1 180px;max-width:280px}
+.you input::placeholder{color:var(--faint)}
+.you input:focus-visible,.btn:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.btn{font:600 .88rem var(--sans);border-radius:8px;padding:9px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06231f}
+.btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line-2)}
 .btn:disabled{opacity:.5;cursor:default}
 .you .mine-line{color:var(--muted)}
 .you .mine-line b{color:var(--ink)}
 .tw{overflow-x:auto}
 .board{width:100%;border-collapse:collapse;font-size:.92rem;min-width:420px}
-.board th{font:600 .7rem var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-align:right;padding:4px 8px;border-bottom:1px solid var(--line)}
+.board th{font:600 .68rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--faint);text-align:right;padding:6px 10px;border-bottom:1px solid var(--line-2)}
 .board th:nth-child(2){text-align:left}
-.board td{padding:7px 8px;border-bottom:1px solid var(--rule);text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
-.board td:nth-child(2){text-align:left;font-family:var(--body);font-weight:600;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.board td:first-child{color:var(--muted);width:2.5em}
-.board tr.me td{background:color-mix(in srgb,var(--far) 12%,transparent)}
+.board td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.board td:nth-child(2){text-align:left;font-family:var(--sans);font-weight:600;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.board td:first-child{color:var(--faint);width:2.5em}
+.board tr.me td{background:color-mix(in srgb,var(--teal) 10%,transparent)}
 .board tr.me td:nth-child(2)::after{content:" (you)";font-weight:500;color:var(--muted)}
 .lbnote{margin:0;font-size:.88rem;color:var(--muted)}
-.lbnote.warn{color:var(--margin)}
-@media (max-width:560px){.lb{padding:16px 14px 16px 32px}.lb::before{left:15px}}
+.lbnote.warn{color:var(--warn)}
+@media (max-width:560px){.lb{padding:18px 16px}}
 </style>
 </head>
 <body>
@@ -109,77 +110,68 @@ footer{font-size:.84rem;color:var(--muted);border-top:1px solid var(--line);padd
   </header>
 
   <ol class="pads">
+    <li class="group" aria-hidden="true">Foundations · entries, Excel and tax</li>
     <li><a class="pad debit" href="debit.html">
-      <span class="step">01</span>
+      <span class="top"><span class="step">01</span></span>
       <span class="body"><h2>Debit <span>Drill</span></h2>
         <p>Journal entries and debit/credit rules for everyday transactions.</p>
         <span class="tags"><span>Journal entries</span><span>Adjusting entries</span><span>Normal balances</span></span></span>
-      <span class="go">Open →</span>
-      <span class="mine" data-key="debitDrill"></span></a></li>
+      <span class="foot"><span class="mine" data-key="debitDrill"></span><span class="go">Open →</span></span></a></li>
     <li><a class="pad pe" href="period-end.html">
-      <span class="step">02</span>
+      <span class="top"><span class="step">02</span></span>
       <span class="body"><h2>Period-End <span>Drill</span></h2>
         <p>Adjusting entries and how the three financial statements tie together.</p>
         <span class="tags"><span>Accruals &amp; deferrals</span><span>Missed-adjustment effects</span><span>Cash flows</span></span></span>
-      <span class="go">Open →</span>
-      <span class="mine" data-key="periodEndDrill"></span></a></li>
+      <span class="foot"><span class="mine" data-key="periodEndDrill"></span><span class="go">Open →</span></span></a></li>
     <li><a class="pad formula" href="formula.html">
-      <span class="step">03</span>
+      <span class="top"><span class="step">03</span></span>
       <span class="body"><h2>Formula <span>Drill</span></h2>
         <p>Real Excel formulas, graded by a built-in formula engine, from SUM to XLOOKUP and NPV.</p>
         <span class="tags"><span>Lookups</span><span>SUMIFS</span><span>Cell references</span><span>PMT &amp; NPV</span></span></span>
-      <span class="go">Open →</span>
-      <span class="mine" data-key="formulaDrill"></span></a></li>
+      <span class="foot"><span class="mine" data-key="formulaDrill"></span><span class="go">Open →</span></span></a></li>
     <li><a class="pad tax" href="tax.html">
-      <span class="step">04</span>
+      <span class="top"><span class="step">04</span></span>
       <span class="body"><h2>Tax Return Basics <span>Drill</span></h2>
         <p>Filing status, the standard deduction and the Form 1040 flow, with tax year 2026 figures. Built as prep for VITA.</p>
         <span class="tags"><span>Filing status</span><span>Standard deduction</span><span>AGI &amp; taxable income</span><span>Refund or owed</span></span></span>
-      <span class="go">Open →</span>
-      <span class="mine" data-key="taxDrill"></span></a></li>
-    <li class="group" aria-hidden="true">CPA exam · core and discipline sections</li>
-    <li><a class="pad aud" href="aud.html">
-      <span class="step">05</span>
+      <span class="foot"><span class="mine" data-key="taxDrill"></span><span class="go">Open →</span></span></a></li>
+    <li class="group cpa-label" aria-hidden="true">CPA exam · core and discipline sections</li>
+    <li class="cpa"><a class="pad aud" href="aud.html">
+      <span class="top"><span class="step">05</span></span>
       <span class="body"><h2>AUD <span>Drill</span></h2>
         <p>Auditing and attestation: risk, evidence, internal control, sampling and audit reports.</p>
         <span class="tags"><span>Audit risk model</span><span>Assertions</span><span>Sampling</span><span>Opinions</span></span></span>
-      <span class="go">Open →</span>
-      <span class="mine" data-key="audDrill"></span></a></li>
-    <li><a class="pad far" href="far.html">
-      <span class="step">06</span>
+      <span class="foot"><span class="mine" data-key="audDrill"></span><span class="go">Open →</span></span></a></li>
+    <li class="cpa"><a class="pad far" href="far.html">
+      <span class="top"><span class="step">06</span></span>
       <span class="body"><h2>FAR <span>Drill</span></h2>
         <p>Financial Accounting and Reporting: bonds, leases, revenue recognition and income taxes.</p>
         <span class="tags"><span>Bonds</span><span>Leases (ASC 842)</span><span>Revenue (ASC 606)</span><span>Income taxes</span></span></span>
-      <span class="go">Open →</span>
-      <span class="mine" data-key="farDrill"></span></a></li>
-    <li><a class="pad reg" href="reg.html">
-      <span class="step">07</span>
+      <span class="foot"><span class="mine" data-key="farDrill"></span><span class="go">Open →</span></span></a></li>
+    <li class="cpa"><a class="pad reg" href="reg.html">
+      <span class="top"><span class="step">07</span></span>
       <span class="body"><h2>REG <span>Drill</span></h2>
         <p>Regulation: individual tax, property transactions, business law and tax ethics.</p>
         <span class="tags"><span>Gross income</span><span>Basis &amp; like-kind</span><span>Contracts &amp; agency</span><span>Circular 230</span></span></span>
-      <span class="go">Open →</span>
-      <span class="mine" data-key="regDrill"></span></a></li>
-    <li><a class="pad bar" href="bar.html">
-      <span class="step">08</span>
+      <span class="foot"><span class="mine" data-key="regDrill"></span><span class="go">Open →</span></span></a></li>
+    <li class="cpa"><a class="pad bar" href="bar.html">
+      <span class="top"><span class="step">08</span></span>
       <span class="body"><h2>BAR <span>Drill</span></h2>
         <p>Business Analysis and Reporting: managerial accounting, ratios, business combinations and government.</p>
         <span class="tags"><span>CVP &amp; variances</span><span>Ratios</span><span>Goodwill &amp; equity method</span><span>Fund accounting</span></span></span>
-      <span class="go">Open →</span>
-      <span class="mine" data-key="barDrill"></span></a></li>
-    <li><a class="pad isc" href="isc.html">
-      <span class="step">09</span>
+      <span class="foot"><span class="mine" data-key="barDrill"></span><span class="go">Open →</span></span></a></li>
+    <li class="cpa"><a class="pad isc" href="isc.html">
+      <span class="top"><span class="step">09</span></span>
       <span class="body"><h2>ISC <span>Drill</span></h2>
         <p>Information Systems and Controls: IT controls, SOC reports, security and continuity.</p>
         <span class="tags"><span>ITGCs</span><span>SOC 1 &amp; 2</span><span>Encryption</span><span>Backups</span></span></span>
-      <span class="go">Open →</span>
-      <span class="mine" data-key="iscDrill"></span></a></li>
-    <li><a class="pad tcp" href="tcp.html">
-      <span class="step">10</span>
+      <span class="foot"><span class="mine" data-key="iscDrill"></span><span class="go">Open →</span></span></a></li>
+    <li class="cpa"><a class="pad tcp" href="tcp.html">
+      <span class="top"><span class="step">10</span></span>
       <span class="body"><h2>TCP <span>Drill</span></h2>
         <p>Tax Compliance and Planning: entities, partnerships and S corps, gifts and estates, planning.</p>
         <span class="tags"><span>C corp taxable income</span><span>Partner basis</span><span>Gift &amp; estate tax</span><span>NIIT &amp; passive losses</span></span></span>
-      <span class="go">Open →</span>
-      <span class="mine" data-key="tcpDrill"></span></a></li>
+      <span class="foot"><span class="mine" data-key="tcpDrill"></span><span class="go">Open →</span></span></a></li>
   </ol>
 
   <section class="lb" aria-labelledby="lbh">
@@ -207,7 +199,7 @@ const SHEET_URL = "https://script.google.com/macros/s/AKfycbwSxV-NHVT7AO1TBizdA6
 document.querySelectorAll(".mine").forEach(el=>{
   let s={};try{s=JSON.parse(localStorage.getItem(el.dataset.key)||"{}")}catch(e){}
   const m=Array.isArray(s.missed)?s.missed.length:0,b=s.best||0;
-  if(b||m)el.innerHTML=`Your best streak <b>${b}</b> · <b>${m}</b> miss${m===1?"":"es"} to redo`;
+  if(b||m)el.innerHTML=`Best streak <b>${b}</b> · <b>${m}</b> to redo`;
   else el.hidden=true;
 });
 
